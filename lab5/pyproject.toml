@@ -1,0 +1,39 @@
+[project]
+name = "basics-of-ai-agh-lab5"
+version = "1.0.0"
+description = "Basics of Artificial Intelligence course at AGH - lab 5: NLP"
+authors = []
+requires-python = "==3.12.*"
+
+dependencies = [
+    # general
+    "matplotlib",
+    "numpy",
+    "pandas>=2.2",
+    "scikit-learn>=1.8",
+    "torch>=2.8.0",
+    # lab 5 - NLP
+    "accelerate>=1.10",
+    "datasets>=3.6",
+    "sentence-transformers>=5",
+    "transformers>=4.55,<5",
+]
+
+[dependency-groups]
+dev = [
+    # not exported to requirements.txt, it breaks Google Colab
+    "jupyter",
+    "ipywidgets",
+]
+
+# CUDA PyTorch on Linux and Windows (PyPI wheels are CPU-only on Windows; CUDA wheels also work
+# without a GPU, falling back to CPU); PyPI on macOS, where it uses MPS
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cu130", marker = "sys_platform != 'darwin'" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
